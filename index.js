@@ -78,7 +78,7 @@ watcher.on("add", file => {
         const parsed = path.parse(path.resolve(tname + "-vsnap.png"));
         if (!parsed || !parsed.dir || !parsed.base) {
             console.error("failed to parse path", parsed, path.resolve(tname + path.extname(file)));
-            process.exit(1);
+            return;
         }
         ffmpeg(file).on("end", () => {
             const pngname = path.join(parsed.dir, parsed.base);
@@ -101,12 +101,9 @@ watcher.on("add", file => {
             }).catch(err => {
                 fs.unlinkSync(pngname);
                 console.error("failed to read png", pngname, err);
-                process.exit(1);
             });
-            //process.exit(0);
         }).on("error", err => {
             console.error("ffmpeg error", err);
-            process.exit(1);
         }).screenshots({
             folder: parsed.dir,
             filename: parsed.base,
@@ -114,7 +111,6 @@ watcher.on("add", file => {
         });
     }).catch(err => {
         console.error("failed to make tmpname", err);
-        process.exit(1);
     });
 });
 
