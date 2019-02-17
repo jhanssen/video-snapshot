@@ -75,7 +75,7 @@ watcher.on("add", file => {
     }
     const region = match[1].toLowerCase();
     tmpName().then(tname => {
-        const parsed = path.parse(path.resolve(tname + ".png"));
+        const parsed = path.parse(path.resolve(tname + "-vsnap.png"));
         if (!parsed || !parsed.dir || !parsed.base) {
             console.error("failed to parse path", parsed, path.resolve(tname + path.extname(file)));
             process.exit(1);
