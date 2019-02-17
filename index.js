@@ -57,8 +57,6 @@ function append(str, sub) {
 const mqtttopic = append(options("mqtt-topic", "/security/camera/"), "/");
 const subtopic = options("subtopic", "motion");
 
-const interval = options.int("publish-interval", 10000);
-
 const namerx = /my region in ([^ $]+)/;
 
 const watcher = chokidar.watch(dir, { 
